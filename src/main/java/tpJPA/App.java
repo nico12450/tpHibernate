@@ -30,7 +30,7 @@ public class App {
 		
 		System.out.println(livreByClient(c1));
 		System.out.println(clientByLivre(l1));
-		//System.out.println(livresAchetes());
+		System.out.println(livresAchetes());
 
 		/*em = DatabaseHelper.createEntityManager();
 		Livre findBook = em.find(Livre.class, l1.getId());
@@ -44,7 +44,6 @@ public class App {
 		EntityManager em = DatabaseHelper.createEntityManager();
 		
 		c.getLivresAchats().add(l);
-		//l.getClientsAchats().add(c);
 		
 		em.getTransaction().begin();
 		em.merge(c);
@@ -71,14 +70,12 @@ public class App {
 		
 		List<Client> L;
 		
-		
 		EntityManager em = DatabaseHelper.createEntityManager();
 		
 		TypedQuery<Client> query = em.createQuery("select c from Client c inner join c.livresAchats l where l.id=:id", Client.class);
 		query.setParameter("id", id);
 		L = query.getResultList();
-		
-		
+			
 		em.close();
 		
 		return L;
@@ -87,16 +84,16 @@ public class App {
 
 	public static List<Livre> livresAchetes(){
 		
-		EntityManager em = DatabaseHelper.createEntityManager();
-		
-		TypedQuery<Livre> query = em.createQuery("from Livre", Livre.class);
+		EntityManager em = DatabaseHelper.createEntityManager();	
+
+		TypedQuery<Livre> query = em.createQuery("select l from Livre l inner join l.clientsAchats", Livre.class);
 		List<Livre> l = query.getResultList();
-		
-		ArrayList<Livre> L = (ArrayList<Livre>) l.stream().filter(e -> e.getClientsAchats()!=null).collect(Collectors.toList());
+
+		//ArrayList<Livre> L = (ArrayList<Livre>) l.stream().filter(e -> e.getClientsAchats()!=null).collect(Collectors.toList());
 			
 		em.close();
 		
-		return L;
+		return l;
 		
 	}
 	
