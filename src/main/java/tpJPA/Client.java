@@ -75,7 +75,7 @@ public class Client {
 		return livrePrefere;
 	}
 
-	public List<Livre> getAchats() {
+	public List<Livre> getLivresAchats() {
 		return livresAchats;
 	}
 

@@ -53,7 +53,7 @@ public class Livre {
 		this.auteur = auteur;
 	}
 
-	public List<Client> getAchetePar() {
+	public List<Client> getClientsAchats() {
 		return clientsAchats;
 	}
 
